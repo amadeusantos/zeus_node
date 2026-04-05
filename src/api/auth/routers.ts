@@ -3,8 +3,7 @@ import { AuthenticateSchema, TokenSchema } from './schemas.js';
 import { RequestContext } from '@mikro-orm/core';
 import { User } from '../../infrastructure/mikro-orm/entities/user.entity.js';
 import argon2 from 'argon2';
-import { InvalidCredentialsException } from './exceptions.js';
-import { UserInactiveException } from '../exceptions.js';
+import { InvalidCredentialsException, UserInactiveException } from './exceptions.js';
 
 import { authenticated } from '../authentication.js';
 import { UserPrincipal } from '../schemas.js';

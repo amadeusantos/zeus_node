@@ -22,10 +22,3 @@ export class ForbiddenException extends CoreException {
     super(403, 'User not authorized');
   }
 }
-
-export class UserInactiveException extends CoreException {
-  constructor() {
-    super(403, 'User account is inactive');
-  }
-}
-

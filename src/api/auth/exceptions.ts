@@ -6,3 +6,8 @@ export class InvalidCredentialsException extends CoreException {
   }
 }
 
+export class UserInactiveException extends CoreException {
+  constructor() {
+    super(403, 'User account is inactive');
+  }
+}
