@@ -6,10 +6,12 @@ import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod';
 import { UserCreateSchema, UserQuerySchema, UserSchema, UserUpdateSchema } from './schemas.js';
 import { validateEmail } from './validations.js';
 import argon2 from 'argon2';
+import { randomBytes } from 'crypto';
 import z from 'zod';
 import { createPaginationSchema, UserMinimalSchema } from '../schemas.js';
 import { authorization } from '../authentication.js';
 import { syncRoles } from './actions.js';
+import { env } from '../../config/index.js';
 
 export const userRoutes: FastifyPluginAsyncZod = async (app) => {
   async function getUserById(id: string) {
@@ -51,7 +53,7 @@ export const userRoutes: FastifyPluginAsyncZod = async (app) => {
 
     await validateEmail(email);
 
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await argon2.hash(password, { salt: randomBytes(env.ARGON2_SALT_LENGTH) });
 
     const em = RequestContext.getEntityManager()!;
     const user = em.create(User, {

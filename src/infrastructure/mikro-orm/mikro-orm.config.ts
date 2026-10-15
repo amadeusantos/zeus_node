@@ -9,5 +9,6 @@ export default defineConfig({
   password: env.DB_PASSWORD,
   host: env.DB_HOST,
   port: env.DB_PORT,
+  pool: { max: env.DB_POOL_SIZE },
   debug: env.NODE_ENV === 'dev',
 });
